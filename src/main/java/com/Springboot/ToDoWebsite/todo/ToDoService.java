@@ -11,9 +11,9 @@ public class ToDoService {
     private static List<Todo> todos = new ArrayList<>();
 
     static {
-        todos.add(new Todo(1, "Udemy", "Learn Spring Boot in 100 Steps - No 1 Java Framework", LocalDate.now().plusDays(10), false));
-        todos.add(new Todo(2, "Udemy", "The Complete Javascript Course for Developers", LocalDate.now().plusMonths(1), false));
-        todos.add(new Todo(3, "Udemy", "HTML and CSS Masterclass", LocalDate.now().plusMonths(2), false));
+        todos.add(new Todo(1, "Pranav Tiwari", "Learn Spring Boot in 100 Steps - No 1 Java Framework", LocalDate.now().plusDays(10), false));
+        todos.add(new Todo(2, "Pranav Tiwari", "The Complete Javascript Course for Developers", LocalDate.now().plusMonths(1), false));
+        todos.add(new Todo(3, "Pranav Tiwari", "HTML and CSS Masterclass", LocalDate.now().plusMonths(2), false));
     }
 
     public List<Todo> findToDOByUsername(String username){
