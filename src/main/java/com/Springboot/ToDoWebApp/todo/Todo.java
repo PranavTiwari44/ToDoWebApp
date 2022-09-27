@@ -1,9 +1,7 @@
-package com.Springboot.ToDoWebsite.todo;
+package com.Springboot.ToDoWebApp.todo;
 
 
 import jakarta.validation.constraints.Size;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 

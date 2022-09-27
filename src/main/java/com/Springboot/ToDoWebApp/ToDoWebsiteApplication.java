@@ -1,4 +1,4 @@
-package com.Springboot.ToDoWebsite;
+package com.Springboot.ToDoWebApp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
