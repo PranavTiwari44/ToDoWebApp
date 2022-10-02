@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import java.time.LocalDate;
 import java.util.List;
 
-//@Controller
+@Controller
 @SessionAttributes("name")
-public class ToDoController {
+public class ToDoControllerJpa {
 
-    private ToDoService toDoService;
+    private TodoRepository todoRepository;
 
-    public ToDoController(ToDoService toDoService) {
-        this.toDoService = toDoService;
+    public ToDoControllerJpa( TodoRepository todoRepository) {
+        this.todoRepository = todoRepository;
     }
 
     @RequestMapping("list-todos")
     public String listAllToDos(ModelMap model) {
         String username = getLoggedInUsername(model);
-        List<Todo> todos = toDoService.findToDoByUsername(username);
+        List<Todo> todos = todoRepository.findByUsername(username);
         model.addAttribute("todos", todos);
         return "listTodos";
     }
@@ -44,19 +44,20 @@ public class ToDoController {
         if(result.hasErrors()){
             return "todo";
         }
-        toDoService.addTodo(getLoggedInUsername(model), todo.getDescription(), todo.getTargetDate(), false);
+        todo.setUsername(getLoggedInUsername(model));
+        todoRepository.save(todo);
         return "redirect:list-todos";
     }
 
     @RequestMapping(value = "delete-todo")
     public String deleteToDo(@RequestParam int id) {
-        toDoService.deleteTodoById(id);
+        todoRepository.deleteById(id);
         return "redirect:list-todos";
     }
 
     @RequestMapping(value = "update-todo", method = RequestMethod.GET)
     public String showUpdateToDoPage(@RequestParam int id, ModelMap model) {
-        Todo todo = toDoService.findByID(id);
+        Todo todo = todoRepository.findById(id).get();
         model.addAttribute("todo", todo);
         return "todo";
     }
@@ -67,7 +68,7 @@ public class ToDoController {
             return "todo";
         }
         todo.setUsername(getLoggedInUsername(model));
-        toDoService.updateTodo(todo);
+        todoRepository.save(todo);
         return "redirect:list-todos";
     }
 
